@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7 Gates Collective — Private Client Support</title>
+<meta name="description" content="7 Gates Collective provides senior-level virtual support for principals, finance leaders, and family offices who need precision, not noise.">
+
+<!--
+  ============================================================
+  7 GATES COLLECTIVE — SETUP NOTES
+  ============================================================
+  1. Calendly: search "PASTE-YOUR-CALENDLY-LINK-HERE" below (two
+     spots) and replace with your real Calendly URL, e.g.
+     https://calendly.com/your-username/discovery-call
+  2. Contact email: search "hello@7gatescollective.com" and
+     replace with your real inbox.
+  3. Founder names: search "[Founder One]" and "[Founder Two]"
+     and replace with your names / titles.
+  4. To publish on GitHub Pages: upload this file as index.html
+     to a repo, then turn on Pages in the repo Settings.
+  ============================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper: #fcfcfa;
+    --panel: #ffffff;
+    --ink: #15160f;
+    --stone: #6e6d64;
+    --stone-light: #a9a79c;
+    --hairline: #e7e5dd;
+    --brass: #93764a;
+    --brass-tint: #f2ede2;
+    --deep: #101208;
+    --deep-ink: #efece2;
+    --radius-lg: 28px;
+    --radius-md: 18px;
+    --radius-pill: 999px;
+    --max: 1120px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+
+  body{
+    margin:0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+
+  h1,h2,h3{
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  a{ color: inherit; }
+  img{ max-width: 100%; display:block; }
+
+  .wrap{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .eyebrow{
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--brass);
+    font-weight: 600;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: var(--radius-pill);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color .25s ease;
+  }
+  .btn-primary{
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .btn-primary:hover{
+    box-shadow: 0 10px 24px rgba(21,22,15,0.22);
+    transform: translateY(-1px);
+  }
+  .btn-ghost{
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--hairline);
+  }
+  .btn-ghost:hover{
+    border-color: var(--ink);
+  }
+  .btn-on-dark{
+    background: var(--deep-ink);
+    color: var(--deep);
+  }
+  .btn-on-dark:hover{
+    box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+    transform: translateY(-1px);
+  }
+
+  /* ---------- Nav ---------- */
+  header{
+    position: fixed;
+    top:0; left:0; right:0;
+    z-index: 100;
+    padding: 22px 0;
+    transition: background .3s ease, padding .3s ease, box-shadow .3s ease;
+  }
+  header.scrolled{
+    background: rgba(252,252,250,0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 14px 0;
+    box-shadow: 0 1px 0 var(--hairline);
+  }
+  nav.wrap{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+    text-decoration:none;
+    font-family:'Newsreader', serif;
+    font-size: 18px;
+    color: var(--ink);
+    letter-spacing: 0.01em;
+  }
+  .gatemark{ flex-shrink:0; }
+  .navlinks{
+    display:flex;
+    align-items:center;
+    gap: 36px;
+    font-size: 14px;
+    color: var(--stone);
+  }
+  .navlinks a{
+    text-decoration:none;
+    transition: color .2s ease;
+  }
+  .navlinks a:hover{ color: var(--ink); }
+  .nav-cta{ display:flex; align-items:center; gap: 20px; }
+  .menu-toggle{
+    display:none;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding: 8px;
+  }
+  .menu-toggle span{
+    display:block;
+    width:22px; height:2px;
+    background: var(--ink);
+    margin: 5px 0;
+    border-radius: 2px;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding: 200px 0 60px;
+    text-align:center;
+  }
+  .hero h1{
+    font-size: clamp(38px, 6vw, 64px);
+    line-height: 1.08;
+    max-width: 820px;
+    margin: 22px auto 26px;
+  }
+  .hero h1 em{ font-style: italic; color: var(--brass); }
+  .hero p{
+    max-width: 560px;
+    margin: 0 auto 36px;
+    color: var(--stone);
+    font-size: 17px;
+  }
+  .hero-ctas{
+    display:flex;
+    justify-content:center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  /* ---------- Gate divider (signature element) ---------- */
+  .gates{
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    gap: 10px;
+    height: 70px;
+    margin: 70px 0;
+  }
+  .gates .bar{
+    width: 4px;
+    border-radius: 4px;
+    background: var(--hairline);
+    transform-origin: bottom;
+    animation: rise 1s ease both;
+  }
+  .gates.tinted .bar{ background: var(--brass); opacity: .55; }
+  @keyframes rise{
+    from{ transform: scaleY(0); opacity:0; }
+    to{ transform: scaleY(1); opacity:1; }
+  }
+  .gates .bar:nth-child(1){ height: 22px; animation-delay: .02s;}
+  .gates .bar:nth-child(2){ height: 40px; animation-delay: .08s;}
+  .gates .bar:nth-child(3){ height: 58px; animation-delay: .14s;}
+  .gates .bar:nth-child(4){ height: 70px; animation-delay: .2s;}
+  .gates .bar:nth-child(5){ height: 58px; animation-delay: .26s;}
+  .gates .bar:nth-child(6){ height: 40px; animation-delay: .32s;}
+  .gates .bar:nth-child(7){ height: 22px; animation-delay: .38s;}
+
+  section{ padding: 90px 0; }
+  .section-head{
+    max-width: 620px;
+    margin: 0 auto 56px;
+    text-align:center;
+  }
+  .section-head h2{
+    font-size: clamp(28px, 4vw, 38px);
+    margin-top: 14px;
+  }
+  .section-head p{
+    color: var(--stone);
+    margin-top: 16px;
+    font-size: 16px;
+  }
+
+  /* ---------- About ---------- */
+  .about{
+    display:grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 64px;
+    align-items:center;
+  }
+  .about-panel{
+    background: var(--panel);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-lg);
+    padding: 48px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    gap: 18px;
+    box-shadow: 0 30px 60px -40px rgba(21,22,15,0.25);
+  }
+  .avatar-row{
+    display:flex;
+    justify-content:center;
+    margin-bottom: 4px;
+  }
+  .avatar{
+    position: relative;
+    width: 76px; height: 76px;
+    border-radius: 50%;
+    background: var(--brass-tint);
+    border: 3px solid var(--panel);
+    box-shadow: 0 6px 18px rgba(21,22,15,0.14);
+    overflow: hidden;
+  }
+  .avatar + .avatar{ margin-left: -16px; }
+  .avatar img{
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .avatar-fallback{
+    display:none;
+    position:absolute; inset:0;
+    align-items:center; justify-content:center;
+    font-family:'Newsreader', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--brass);
+    background: var(--brass-tint);
+  }
+  .about-panel .names{
+    font-family:'Newsreader', serif;
+    font-size: 20px;
+  }
+  .about-panel .roles{
+    font-size: 13px;
+    color: var(--stone);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .about-copy h2{ font-size: clamp(26px,3.4vw,34px); margin-bottom: 20px; }
+  .about-copy p{ color: var(--stone); margin: 0 0 16px; font-size: 16px; }
+  .about-copy p:last-child{ margin-bottom:0; }
+
+  /* ---------- Services ---------- */
+  .services-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .service-card{
+    background: var(--panel);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-lg);
+    padding: 36px 30px;
+    transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  }
+  .service-card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 24px 50px -30px rgba(21,22,15,0.28);
+    border-color: transparent;
+  }
+  .service-icon{
+    width: 44px; height:44px;
+    border-radius: 50%;
+    background: var(--brass-tint);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom: 22px;
+  }
+  .service-card h3{
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+  .service-card p{
+    color: var(--stone);
+    font-size: 14.5px;
+    margin: 0;
+  }
+
+  /* ---------- Process ---------- */
+  .process{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+  .step{ text-align:center; padding: 0 12px; }
+  .step .num{
+    font-family:'Newsreader', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--brass);
+    display:block;
+    margin-bottom: 18px;
+  }
+  .step h3{ font-size: 20px; margin-bottom: 12px; }
+  .step p{ color: var(--stone); font-size: 15px; margin:0; }
+
+  /* ---------- Book a call ---------- */
+  .book{
+    background: var(--panel);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-lg);
+    padding: 56px;
+    box-shadow: 0 40px 80px -50px rgba(21,22,15,0.3);
+  }
+  .book-head{ text-align:center; max-width: 560px; margin: 0 auto 40px; }
+  .book-head h2{ font-size: clamp(28px,4vw,36px); margin-top:14px; }
+  .book-head p{ color: var(--stone); margin-top:14px; }
+
+  .calendly-frame{
+    border-radius: var(--radius-md);
+    overflow:hidden;
+    border: 1px solid var(--hairline);
+    min-height: 700px;
+  }
+
+  /* fallback card, shown until Calendly link is configured or widget fails to load */
+  .book-fallback{
+    text-align:center;
+    padding: 60px 20px;
+    color: var(--stone);
+  }
+  .book-fallback strong{ color: var(--ink); display:block; margin-bottom: 8px; font-family:'Newsreader', serif; font-size: 20px; font-weight:500; }
+
+  /* ---------- Closing banner ---------- */
+  .banner{
+    background: var(--deep);
+    color: var(--deep-ink);
+    border-radius: var(--radius-lg);
+    padding: 72px 48px;
+    text-align:center;
+    margin: 0 32px;
+  }
+  .banner .wrap{ padding:0; }
+  .banner h2{
+    font-size: clamp(26px,4vw,36px);
+    font-style: italic;
+    max-width: 640px;
+    margin: 18px auto 30px;
+    color: var(--deep-ink);
+  }
+  .banner .eyebrow{ color: var(--brass); }
+
+  /* ---------- Footer ---------- */
+  footer{ padding: 60px 0 40px; }
+  .footer-inner{
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    padding-top: 32px;
+    border-top: 1px solid var(--hairline);
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .footer-brand{
+    display:flex; align-items:center; gap:12px;
+    font-family:'Newsreader', serif;
+  }
+  .footer-links{
+    display:flex; gap: 28px; font-size: 14px; color: var(--stone);
+  }
+  .footer-links a{ text-decoration:none; }
+  .footer-links a:hover{ color: var(--ink); }
+  .footer-fine{ font-size: 13px; color: var(--stone-light); margin-top: 18px; }
+
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--brass);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px){
+    .about{ grid-template-columns: 1fr; }
+    .services-grid{ grid-template-columns: 1fr 1fr; }
+    .process{ grid-template-columns: 1fr; gap: 44px; }
+    .banner{ margin: 0 16px; padding: 56px 28px; }
+  }
+  @media (max-width: 680px){
+    .navlinks{
+      position:absolute;
+      top: 64px; left:16px; right:16px;
+      background: var(--panel);
+      border:1px solid var(--hairline);
+      border-radius: var(--radius-md);
+      flex-direction:column;
+      align-items:flex-start;
+      padding: 20px 24px;
+      gap: 16px;
+      box-shadow: 0 20px 40px -20px rgba(0,0,0,0.2);
+      display:none;
+    }
+    .navlinks.open{ display:flex; }
+    .menu-toggle{ display:block; }
+    .nav-cta .btn-ghost{ display:none; }
+    .hero{ padding: 150px 0 40px; }
+    .services-grid{ grid-template-columns: 1fr; }
+    .about-panel{ padding: 36px 24px; }
+    .book{ padding: 32px 20px; }
+    section{ padding: 64px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <nav class="wrap">
+    <a href="#top" class="brand">
+      <svg class="gatemark" width="26" height="20" viewBox="0 0 26 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="0" y="6" width="2.4" height="8" rx="1.2" fill="#93764a"/>
+        <rect x="4" y="3" width="2.4" height="14" rx="1.2" fill="#93764a"/>
+        <rect x="8" y="0" width="2.4" height="20" rx="1.2" fill="#93764a"/>
+        <rect x="12" y="3" width="2.4" height="14" rx="1.2" fill="#93764a"/>
+        <rect x="16" y="6" width="2.4" height="8" rx="1.2" fill="#93764a"/>
+        <rect x="20" y="8" width="2.4" height="4" rx="1.2" fill="#93764a"/>
+        <rect x="23.6" y="9" width="2.4" height="2" rx="1" fill="#93764a" opacity=".6"/>
+      </svg>
+      7 Gates Collective
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="navlinks" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#book">Book a Call</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#book" class="btn btn-ghost">Client Login</a>
+      <a href="#book" class="btn btn-primary">Book Discovery Call</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+  <section class="hero wrap">
+    <p class="eyebrow">Private Client Services</p>
+    <h1>Discretion is the standard.<br><em>Precision</em> is the practice.</h1>
+    <p>7 Gates Collective provides senior-level virtual support for principals, finance leaders, and family offices who need one point of contact — not another platform to manage.</p>
+    <div class="hero-ctas">
+      <a href="#book" class="btn btn-primary">Book a Discovery Call</a>
+      <a href="#services" class="btn btn-ghost">View Services</a>
+    </div>
+  </section>
+
+  <div class="gates" aria-hidden="true">
+    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+    <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+  </div>
+
+  <section id="about" class="wrap">
+    <div class="about">
+      <div class="about-panel">
+        <!--
+          FOUNDER PHOTOS
+          Add two square-ish photos to your repo (e.g. founder-one.jpg,
+          founder-two.jpg) and update the src paths below. If a photo
+          is missing, the bubble will gracefully show initials instead.
+        -->
+        <div class="avatar-row">
+          <div class="avatar">
+            <img src="founder-one.jpg" alt="Founder One"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="avatar-fallback">F1</div>
+          </div>
+          <div class="avatar">
+            <img src="founder-two.jpg" alt="Founder Two"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="avatar-fallback">F2</div>
+          </div>
+        </div>
+        <div class="names">[Founder One] &amp; [Founder Two]</div>
+        <div class="roles">Founders, 7 Gates Collective</div>
+      </div>
+      <div class="about-copy">
+        <p class="eyebrow">Who We Are</p>
+        <h2>A two-person practice, built for people who don't have time to onboard a team.</h2>
+        <p>7 Gates Collective is run by a partnership, not a platform. Every engagement is handled personally by one of us — no rotating staff, no ticket queue, no relearning your preferences from scratch.</p>
+        <p>We built this practice around a simple idea: the people managing the most complex responsibilities deserve support that feels effortless. That means fewer touchpoints, faster judgment calls, and a standard of confidentiality we treat as non-negotiable.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">What We Handle</p>
+      <h2>Support that disappears into the background</h2>
+      <p>A short list of what we take off your plate — scoped to your world during the discovery call.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1" y="3" width="16" height="13" rx="2.5" stroke="#93764a" stroke-width="1.4"/><path d="M1 6.5H17" stroke="#93764a" stroke-width="1.4"/><path d="M5 1V4M13 1V4" stroke="#93764a" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Calendar &amp; Inbox Command</h3>
+        <p>Full ownership of scheduling and correspondence, triaged and handled the way you'd handle it yourself.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1L11 6L16.5 6.7L12.5 10.5L13.5 16L9 13.2L4.5 16L5.5 10.5L1.5 6.7L7 6L9 1Z" stroke="#93764a" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Travel &amp; Lifestyle Logistics</h3>
+        <p>Itineraries, reservations, and last-minute changes managed end-to-end, without the back-and-forth.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="3" stroke="#93764a" stroke-width="1.4"/><path d="M5.5 9H12.5M5.5 12H10" stroke="#93764a" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Board &amp; Meeting Preparation</h3>
+        <p>Materials assembled, agendas confirmed, and follow-ups tracked so nothing depends on memory.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="#93764a" stroke-width="1.4"/><path d="M9 5.5V9L11.5 10.5" stroke="#93764a" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Confidential Project Management</h3>
+        <p>Discrete initiatives run quietly from start to finish, with a single point of accountability.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2C9 2 3 5 3 9C3 12.5 5.5 15 9 16C12.5 15 15 12.5 15 9C15 5 9 2 9 2Z" stroke="#93764a" stroke-width="1.4" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Vendor &amp; Household Operations</h3>
+        <p>Contractors, vendors, and recurring services coordinated so things simply keep running.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 15L6 5L9 12L12 6L16 15" stroke="#93764a" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Special Projects</h3>
+        <p>Anything that doesn't fit a category yet. Bring us the problem — we'll design the process.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="process" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">How We Begin</p>
+      <h2>Three steps, no onboarding fatigue</h2>
+    </div>
+    <div class="process">
+      <div class="step">
+        <span class="num">One</span>
+        <h3>Discovery Call</h3>
+        <p>A focused 30-minute conversation about your world, your pace, and where the friction actually is.</p>
+      </div>
+      <div class="step">
+        <span class="num">Two</span>
+        <h3>Proposal &amp; Match</h3>
+        <p>We scope the engagement and confirm which of us will be your direct point of contact.</p>
+      </div>
+      <div class="step">
+        <span class="num">Three</span>
+        <h3>Quiet Onboarding</h3>
+        <p>Access is set up, preferences documented once, and we get to work — with minimal disruption to you.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="book" class="wrap">
+    <div class="book">
+      <div class="book-head">
+        <p class="eyebrow">Reserve Your Time</p>
+        <h2>Book a discovery call</h2>
+        <p>30 minutes, by video. We'll ask a few questions, you'll ask a few more, and you'll leave knowing exactly what working with us looks like.</p>
+      </div>
+
+      <!--
+        CALENDLY EMBED
+        Replace the src URL below with your own Calendly link.
+        In Calendly: Share → Add to Website → Inline Embed, then
+        copy just the link (e.g. https://calendly.com/you/discovery-call)
+        and paste it in place of PASTE-YOUR-CALENDLY-LINK-HERE.
+      -->
+      <div class="calendly-inline-widget calendly-frame"
+           data-url="PASTE-YOUR-CALENDLY-LINK-HERE?hide_event_type_details=1&hide_gdpr_banner=1"
+           style="width:100%; height:700px;">
+        <div class="book-fallback">
+          <strong>Calendly not connected yet</strong>
+          Add your Calendly link in the site code to activate live booking here.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="banner">
+      <p class="eyebrow">7 Gates Collective</p>
+      <h2>"You shouldn't have to manage the person managing your life."</h2>
+      <a href="#book" class="btn btn-on-dark">Book a Discovery Call</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <a href="#top" class="footer-brand">
+        <svg width="22" height="17" viewBox="0 0 26 20" fill="none" aria-hidden="true">
+          <rect x="0" y="6" width="2.4" height="8" rx="1.2" fill="#93764a"/>
+          <rect x="4" y="3" width="2.4" height="14" rx="1.2" fill="#93764a"/>
+          <rect x="8" y="0" width="2.4" height="20" rx="1.2" fill="#93764a"/>
+          <rect x="12" y="3" width="2.4" height="14" rx="1.2" fill="#93764a"/>
+          <rect x="16" y="6" width="2.4" height="8" rx="1.2" fill="#93764a"/>
+        </svg>
+        7 Gates Collective
+      </a>
+      <div class="footer-links">
+        <a href="mailto:hello@7gatescollective.com">hello@7gatescollective.com</a>
+        <a href="#services">Services</a>
+        <a href="#book">Book a Call</a>
+      </div>
+    </div>
+    <p class="footer-fine">© <span id="year"></span> 7 Gates Collective. By referral and discovery call only.</p>
+  </div>
+</footer>
+
+<!-- Calendly widget assets -->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // header background on scroll
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // mobile menu toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+</script>
+
+</body>
+</html>
