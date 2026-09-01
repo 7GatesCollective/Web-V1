@@ -320,8 +320,10 @@
   /* ---------- Services ---------- */
   .services-grid{
     display:grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 24px;
+    max-width: 880px;
+    margin: 0 auto;
   }
   .service-card{
     background: var(--panel);
@@ -447,7 +449,6 @@
   /* ---------- Responsive ---------- */
   @media (max-width: 900px){
     .about{ grid-template-columns: 1fr; }
-    .services-grid{ grid-template-columns: 1fr 1fr; }
     .process{ grid-template-columns: 1fr; gap: 44px; }
     .banner{ margin: 0 16px; padding: 56px 28px; }
   }
@@ -552,8 +553,9 @@
       <div class="about-copy">
         <p class="eyebrow">Who We Are</p>
         <h2>A two-person practice, built for people who don't have time to onboard a team.</h2>
-        <p>7 Gates Collective is run by a partnership, not a platform. Every engagement is handled personally by one of us — no rotating staff, no ticket queue, no relearning your preferences from scratch.</p>
+        <p>7 Gates Collective is a husband-and-wife practice, not a platform. Every engagement is handled by the two of us, together — no rotating staff, no ticket queue, no relearning your preferences from scratch.</p>
         <p>We built this practice around a simple idea: the people managing the most complex responsibilities deserve support that feels effortless. That means fewer touchpoints, faster judgment calls, and a standard of confidentiality we treat as non-negotiable.</p>
+        <p>Every call, message, and preference is logged and shared between us in real time, so you're never asked to repeat yourself — whoever you reach already knows exactly where things stand.</p>
       </div>
     </div>
   </section>
@@ -561,8 +563,8 @@
   <section id="services" class="wrap">
     <div class="section-head">
       <p class="eyebrow">What We Handle</p>
-      <h2>Support that disappears into the background</h2>
-      <p>A short list of what we take off your plate — scoped to your world during the discovery call.</p>
+      <h2>Four areas. Handled completely.</h2>
+      <p>We stay focused on what we do best — scoped further to your world during the discovery call.</p>
     </div>
     <div class="services-grid">
 
@@ -570,8 +572,8 @@
         <div class="service-icon">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1" y="3" width="16" height="13" rx="2.5" stroke="#93764a" stroke-width="1.4"/><path d="M1 6.5H17" stroke="#93764a" stroke-width="1.4"/><path d="M5 1V4M13 1V4" stroke="#93764a" stroke-width="1.4" stroke-linecap="round"/></svg>
         </div>
-        <h3>Calendar &amp; Inbox Command</h3>
-        <p>Full ownership of scheduling and correspondence, triaged and handled the way you'd handle it yourself.</p>
+        <h3>Calendar, Inbox &amp; DM Management</h3>
+        <p>Full command of scheduling, email, and direct messages — triaged and handled the way you'd handle it yourself, across every channel that reaches you.</p>
       </div>
 
       <div class="service-card">
@@ -586,32 +588,16 @@
         <div class="service-icon">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="3" stroke="#93764a" stroke-width="1.4"/><path d="M5.5 9H12.5M5.5 12H10" stroke="#93764a" stroke-width="1.4" stroke-linecap="round"/></svg>
         </div>
-        <h3>Board &amp; Meeting Preparation</h3>
-        <p>Materials assembled, agendas confirmed, and follow-ups tracked so nothing depends on memory.</p>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="#93764a" stroke-width="1.4"/><path d="M9 5.5V9L11.5 10.5" stroke="#93764a" stroke-width="1.4" stroke-linecap="round"/></svg>
-        </div>
-        <h3>Confidential Project Management</h3>
-        <p>Discrete initiatives run quietly from start to finish, with a single point of accountability.</p>
+        <h3>Meetings, Boards &amp; Contracts</h3>
+        <p>Materials assembled, agendas confirmed, and contracts reviewed and flagged before you ever have to ask.</p>
       </div>
 
       <div class="service-card">
         <div class="service-icon">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2C9 2 3 5 3 9C3 12.5 5.5 15 9 16C12.5 15 15 12.5 15 9C15 5 9 2 9 2Z" stroke="#93764a" stroke-width="1.4" stroke-linejoin="round"/></svg>
         </div>
-        <h3>Vendor &amp; Household Operations</h3>
-        <p>Contractors, vendors, and recurring services coordinated so things simply keep running.</p>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 15L6 5L9 12L12 6L16 15" stroke="#93764a" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/></svg>
-        </div>
-        <h3>Special Projects</h3>
-        <p>Anything that doesn't fit a category yet. Bring us the problem — we'll design the process.</p>
+        <h3>Operations &amp; Project Management</h3>
+        <p>Vendors, files, and confidential initiatives organized and run quietly from start to finish, with one point of accountability.</p>
       </div>
 
     </div>
@@ -630,8 +616,8 @@
       </div>
       <div class="step">
         <span class="num">Two</span>
-        <h3>Proposal &amp; Match</h3>
-        <p>We scope the engagement and confirm which of us will be your direct point of contact.</p>
+        <h3>Proposal &amp; Scope</h3>
+        <p>We put together a clear proposal together and agree on how we'll stay in lockstep behind the scenes — so nothing ever depends on which of us you're talking to.</p>
       </div>
       <div class="step">
         <span class="num">Three</span>
