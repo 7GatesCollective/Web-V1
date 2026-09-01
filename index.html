@@ -238,6 +238,79 @@
   .gates .bar:nth-child(6){ height: 40px; animation-delay: .32s;}
   .gates .bar:nth-child(7){ height: 22px; animation-delay: .38s;}
 
+  /* ---------- Hero Carousel ---------- */
+  .hero-carousel-wrap{
+    margin: 10px auto 0;
+    max-width: 980px;
+  }
+  .hero-carousel{
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    aspect-ratio: 16 / 8.5;
+    background: var(--brass-tint);
+    box-shadow: 0 40px 80px -40px rgba(21,22,15,0.35);
+  }
+  .carousel-slide{
+    position:absolute; inset:0;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+  .carousel-slide.active{ opacity: 1; }
+  .carousel-slide img{
+    width:100%; height:100%;
+    object-fit: cover;
+    transform: scale(1);
+    animation: kenburns 9s ease forwards;
+  }
+  @keyframes kenburns{
+    from{ transform: scale(1); }
+    to{ transform: scale(1.08); }
+  }
+  .carousel-fallback{
+    position:absolute; inset:0;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:center;
+    gap: 14px;
+    background: linear-gradient(135deg, var(--brass-tint), #fff);
+  }
+  .carousel-fallback span{
+    font-family:'Newsreader', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--brass);
+    letter-spacing: 0.02em;
+  }
+  .carousel-dots{
+    position:absolute;
+    bottom: 20px; left:0; right:0;
+    display:flex;
+    justify-content:center;
+    gap: 8px;
+  }
+  .carousel-dot{
+    width: 7px; height:7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.55);
+    border: none;
+    padding:0;
+    cursor:pointer;
+    transition: background .3s ease, transform .3s ease;
+  }
+  .carousel-dot.active{
+    background: #fff;
+    transform: scale(1.25);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .carousel-slide img{ animation: none; }
+  }
+  @media (max-width: 680px){
+    .hero-carousel{ aspect-ratio: 4 / 5; border-radius: var(--radius-md); }
+    .hero-carousel-wrap{ padding: 0 16px; }
+  }
+
   section{ padding: 90px 0; }
   .section-head{
     max-width: 620px;
@@ -521,6 +594,63 @@
     </div>
   </section>
 
+  <div class="hero-carousel-wrap wrap">
+    <!--
+      HERO CAROUSEL PHOTOS
+      Add three wide/landscape photos to your repo named
+      hero-1.jpg, hero-2.jpg, hero-3.jpg (e.g. your workspace,
+      a skyline, a discreet lifestyle/travel shot — whatever
+      fits the "precision and discretion" feel). Until a photo
+      is added, that slide gracefully shows a branded fallback
+      panel instead of a broken image.
+    -->
+    <div class="hero-carousel" id="heroCarousel">
+      <div class="carousel-slide active">
+        <img src="hero-1.jpg" alt=""
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="carousel-fallback" style="display:none;">
+          <svg width="30" height="23" viewBox="0 0 26 20" fill="none" aria-hidden="true">
+            <rect x="0" y="6" width="2.4" height="8" rx="1.2" fill="#93764a"/>
+            <rect x="4" y="3" width="2.4" height="14" rx="1.2" fill="#93764a"/>
+            <rect x="8" y="0" width="2.4" height="20" rx="1.2" fill="#93764a"/>
+            <rect x="12" y="3" width="2.4" height="14" rx="1.2" fill="#93764a"/>
+            <rect x="16" y="6" width="2.4" height="8" rx="1.2" fill="#93764a"/>
+          </svg>
+          <span>7 Gates Collective</span>
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <img src="hero-2.jpg" alt=""
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="carousel-fallback" style="display:none;">
+          <svg width="30" height="23" viewBox="0 0 26 20" fill="none" aria-hidden="true">
+            <rect x="0" y="6" width="2.4" height="8" rx="1.2" fill="#93764a"/>
+            <rect x="4" y="3" width="2.4" height="14" rx="1.2" fill="#93764a"/>
+            <rect x="8" y="0" width="2.4" height="20" rx="1.2" fill="#93764a"/>
+            <rect x="12" y="3" width="2.4" height="14" rx="1.2" fill="#93764a"/>
+            <rect x="16" y="6" width="2.4" height="8" rx="1.2" fill="#93764a"/>
+          </svg>
+          <span>Discretion. Precision. Ease.</span>
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <img src="hero-3.jpg" alt=""
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="carousel-fallback" style="display:none;">
+          <svg width="30" height="23" viewBox="0 0 26 20" fill="none" aria-hidden="true">
+            <rect x="0" y="6" width="2.4" height="8" rx="1.2" fill="#93764a"/>
+            <rect x="4" y="3" width="2.4" height="14" rx="1.2" fill="#93764a"/>
+            <rect x="8" y="0" width="2.4" height="20" rx="1.2" fill="#93764a"/>
+            <rect x="12" y="3" width="2.4" height="14" rx="1.2" fill="#93764a"/>
+            <rect x="16" y="6" width="2.4" height="8" rx="1.2" fill="#93764a"/>
+          </svg>
+          <span>Private Client Services</span>
+        </div>
+      </div>
+      <div class="carousel-dots" id="carouselDots"></div>
+    </div>
+  </div>
+
   <div class="gates" aria-hidden="true">
     <div class="bar"></div><div class="bar"></div><div class="bar"></div>
     <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
@@ -691,6 +821,50 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Hero carousel: auto-advancing crossfade with dot navigation
+  (function(){
+    const carousel = document.getElementById('heroCarousel');
+    if (!carousel) return;
+    const slides = carousel.querySelectorAll('.carousel-slide');
+    const dotsWrap = document.getElementById('carouselDots');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let index = 0;
+    let timer = null;
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Show slide ' + (i + 1));
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+    const dots = dotsWrap.querySelectorAll('.carousel-dot');
+
+    function goTo(i){
+      slides[index].classList.remove('active');
+      dots[index].classList.remove('active');
+      index = i;
+      slides[index].classList.add('active');
+      dots[index].classList.add('active');
+      // restart the Ken Burns zoom on the newly active slide's image
+      const img = slides[index].querySelector('img');
+      if (img){ img.style.animation = 'none'; void img.offsetWidth; img.style.animation = ''; }
+    }
+
+    function next(){ goTo((index + 1) % slides.length); }
+
+    function start(){
+      if (reduceMotion) return; // respect reduced motion: no autoplay
+      stop();
+      timer = setInterval(next, 5000);
+    }
+    function stop(){ if (timer) clearInterval(timer); }
+
+    carousel.addEventListener('mouseenter', stop);
+    carousel.addEventListener('mouseleave', start);
+    start();
+  })();
 
   // Show a fallback message only if the Calendly widget genuinely fails to load
   setTimeout(() => {
