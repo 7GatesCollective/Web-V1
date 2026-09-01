@@ -58,7 +58,21 @@
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     -webkit-font-smoothing: antialiased;
     line-height: 1.5;
+    position: relative;
   }
+
+  /* subtle paper-grain texture for tactile depth */
+  body::before{
+    content:"";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+  header, main, footer{ position: relative; z-index: 1; }
 
   h1,h2,h3{
     font-family: 'Newsreader', Georgia, serif;
@@ -89,12 +103,13 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 14px 28px;
+    padding: 14px 30px;
     border-radius: var(--radius-pill);
     font-family: 'Inter', sans-serif;
-    font-size: 14px;
+    font-size: 12.5px;
     font-weight: 600;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     text-decoration: none;
     border: 1px solid transparent;
     cursor: pointer;
@@ -138,7 +153,7 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding: 14px 0;
-    box-shadow: 0 1px 0 var(--hairline);
+    box-shadow: 0 1px 0 rgba(147,118,74,0.35);
   }
   nav.wrap{
     display:flex;
@@ -166,8 +181,20 @@
   .navlinks a{
     text-decoration:none;
     transition: color .2s ease;
+    position: relative;
+    padding-bottom: 3px;
+  }
+  .navlinks a::after{
+    content:"";
+    position:absolute;
+    left:0; bottom:0;
+    width:0%;
+    height:1px;
+    background: var(--brass);
+    transition: width .3s ease;
   }
   .navlinks a:hover{ color: var(--ink); }
+  .navlinks a:hover::after{ width:100%; }
   .nav-cta{ display:flex; align-items:center; gap: 20px; }
   .menu-toggle{
     display:none;
@@ -188,7 +215,21 @@
   .hero{
     padding: 200px 0 60px;
     text-align:center;
+    position: relative;
+    overflow: hidden;
   }
+  .hero-watermark{
+    position:absolute;
+    top: 44%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    width: min(900px, 140vw);
+    height: auto;
+    opacity: 0.045;
+    pointer-events:none;
+    z-index: 0;
+  }
+  .hero > *{ position: relative; z-index: 1; }
   .hero h1{
     font-size: clamp(38px, 6vw, 64px);
     line-height: 1.08;
@@ -238,7 +279,20 @@
   .gates .bar:nth-child(6){ height: 40px; animation-delay: .32s;}
   .gates .bar:nth-child(7){ height: 22px; animation-delay: .38s;}
 
-  section{ padding: 90px 0; }
+  section{ padding: 108px 0; }
+
+  .reveal{
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.in-view{
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+  }
   .section-head{
     max-width: 620px;
     margin: 0 auto 56px;
@@ -468,7 +522,6 @@
     }
     .navlinks.open{ display:flex; }
     .menu-toggle{ display:block; }
-    .nav-cta .btn-ghost{ display:none; }
     .hero{ padding: 150px 0 40px; }
     .services-grid{ grid-template-columns: 1fr; }
     .about-panel{ padding: 36px 24px; }
@@ -503,7 +556,6 @@
       <a href="#book">Book a Call</a>
     </div>
     <div class="nav-cta">
-      <a href="#book" class="btn btn-ghost">Client Login</a>
       <a href="#book" class="btn btn-primary">Book Discovery Call</a>
     </div>
   </nav>
@@ -512,6 +564,15 @@
 <main id="top">
 
   <section class="hero wrap">
+    <svg class="hero-watermark" viewBox="0 0 26 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="0" y="6" width="2.4" height="8" rx="1.2" fill="#93764a"/>
+      <rect x="4" y="3" width="2.4" height="14" rx="1.2" fill="#93764a"/>
+      <rect x="8" y="0" width="2.4" height="20" rx="1.2" fill="#93764a"/>
+      <rect x="12" y="3" width="2.4" height="14" rx="1.2" fill="#93764a"/>
+      <rect x="16" y="6" width="2.4" height="8" rx="1.2" fill="#93764a"/>
+      <rect x="20" y="8" width="2.4" height="4" rx="1.2" fill="#93764a"/>
+      <rect x="23.6" y="9" width="2.4" height="2" rx="1" fill="#93764a"/>
+    </svg>
     <p class="eyebrow">Private Client Services</p>
     <h1>Discretion is the standard.<br><em>Strategic</em> precision is the practice.</h1>
     <p>7 Gates Collective provides senior-level virtual support for principals, finance leaders, and family offices who need one point of contact — not another platform to manage.</p>
@@ -527,7 +588,7 @@
   </div>
 
   <section id="about" class="wrap">
-    <div class="about">
+    <div class="about reveal">
       <div class="about-panel">
         <!--
           FOUNDER PHOTOS
@@ -553,22 +614,21 @@
       <div class="about-copy">
         <p class="eyebrow">Who We Are</p>
         <h2>A two-person practice, built for people who don't have time to onboard a team.</h2>
-        <p>7 Gates Collective is a two-person practice, not a platform. Every engagement is handled together, with continuity from the first conversation onward.</p>
-        <p>We built this practice around a simple idea: the people managing the most complex responsibilities deserve support that feels effortless. That means fewer touchpoints, sharper judgment, and a standard of confidentiality we treat as non-negotiable.</p>
-        <p>Notes and context are kept between us as a matter of course, so conversations tend to pick up right where they left off.</p>
+        <p>7 Gates Collective is a two-person practice, not a platform — one line of continuity from the first conversation on.</p>
+        <p>We work quietly, stay confidential as a matter of course, and keep the friction out of your day.</p>
       </div>
     </div>
   </section>
 
   <section id="services" class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow">What We Handle</p>
       <h2>Four areas. Handled completely.</h2>
       <p>We stay focused on what we do best — scoped further to your world during the discovery call.</p>
     </div>
     <div class="services-grid">
 
-      <div class="service-card">
+      <div class="service-card reveal" style="transition-delay:0ms;">
         <div class="service-icon">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1" y="3" width="16" height="13" rx="2.5" stroke="#93764a" stroke-width="1.4"/><path d="M1 6.5H17" stroke="#93764a" stroke-width="1.4"/><path d="M5 1V4M13 1V4" stroke="#93764a" stroke-width="1.4" stroke-linecap="round"/></svg>
         </div>
@@ -576,7 +636,7 @@
         <p>Full command of scheduling, email, and direct messages — triaged and handled the way you'd handle it yourself, across every channel that reaches you.</p>
       </div>
 
-      <div class="service-card">
+      <div class="service-card reveal" style="transition-delay:80ms;">
         <div class="service-icon">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1L11 6L16.5 6.7L12.5 10.5L13.5 16L9 13.2L4.5 16L5.5 10.5L1.5 6.7L7 6L9 1Z" stroke="#93764a" stroke-width="1.3" stroke-linejoin="round"/></svg>
         </div>
@@ -584,7 +644,7 @@
         <p>Itineraries, reservations, and last-minute changes managed end-to-end, without the back-and-forth.</p>
       </div>
 
-      <div class="service-card">
+      <div class="service-card reveal" style="transition-delay:160ms;">
         <div class="service-icon">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="3" stroke="#93764a" stroke-width="1.4"/><path d="M5.5 9H12.5M5.5 12H10" stroke="#93764a" stroke-width="1.4" stroke-linecap="round"/></svg>
         </div>
@@ -592,7 +652,7 @@
         <p>Materials assembled, agendas confirmed, and contracts reviewed and flagged before you ever have to ask.</p>
       </div>
 
-      <div class="service-card">
+      <div class="service-card reveal" style="transition-delay:240ms;">
         <div class="service-icon">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2C9 2 3 5 3 9C3 12.5 5.5 15 9 16C12.5 15 15 12.5 15 9C15 5 9 2 9 2Z" stroke="#93764a" stroke-width="1.4" stroke-linejoin="round"/></svg>
         </div>
@@ -604,22 +664,22 @@
   </section>
 
   <section id="process" class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow">How We Begin</p>
       <h2>Three steps, no onboarding fatigue</h2>
     </div>
     <div class="process">
-      <div class="step">
+      <div class="step reveal" style="transition-delay:0ms;">
         <span class="num">One</span>
         <h3>Discovery Call</h3>
         <p>A focused 30-minute conversation about your world, your pace, and where the friction actually is.</p>
       </div>
-      <div class="step">
+      <div class="step reveal" style="transition-delay:100ms;">
         <span class="num">Two</span>
         <h3>Proposal &amp; Scope</h3>
-        <p>We put together a clear proposal together and agree on how we'll stay in lockstep behind the scenes — so nothing ever depends on which of us you're talking to.</p>
+        <p>A clear proposal, agreed together — so nothing depends on which of us you're talking to.</p>
       </div>
-      <div class="step">
+      <div class="step reveal" style="transition-delay:200ms;">
         <span class="num">Three</span>
         <h3>Quiet Onboarding</h3>
         <p>Access is set up, preferences documented once, and we get to work — with minimal disruption to you.</p>
@@ -628,7 +688,7 @@
   </section>
 
   <section id="book" class="wrap">
-    <div class="book">
+    <div class="book reveal">
       <div class="book-head">
         <p class="eyebrow">Reserve Your Time</p>
         <h2>Book a discovery call</h2>
@@ -653,7 +713,7 @@
   </section>
 
   <div class="wrap">
-    <div class="banner">
+    <div class="banner reveal">
       <p class="eyebrow">7 Gates Collective</p>
       <h2>"You shouldn't have to manage the person managing your life."</h2>
       <a href="#book" class="btn btn-on-dark">Book a Discovery Call</a>
@@ -691,6 +751,21 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Scroll-reveal: fade/rise elements into view as the page scrolls
+  (function(){
+    const revealEls = document.querySelectorAll('.reveal');
+    if (!revealEls.length) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => observer.observe(el));
+  })();
 
   // Show a fallback message only if the Calendly widget genuinely fails to load
   setTimeout(() => {
