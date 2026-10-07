@@ -607,7 +607,6 @@ header, nav.wrap { height:60px; }
 .connect-links {display:flex;gap:10px;flex-wrap:wrap;}
 .connect .btn {font-size:13px;padding:10px 16px;}
 .testimonial-grid {display:block;max-width:820px;margin:auto;}
-.testimonial-featured {padding:0;border:0;background:white;box-shadow:none;}
 .testimonial-quote {font-size:clamp(19px,2.1vw,24px);line-height:1.65;color:var(--ink);margin:0 0 28px;text-align:left;font-weight:400;}
 .testimonial-name {font-size:16px;font-weight:600;margin:0 0 8px;}
 .testimonial-badge {display:inline-block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;border:1px solid var(--hairline);border-radius:4px;color:var(--gray);}
